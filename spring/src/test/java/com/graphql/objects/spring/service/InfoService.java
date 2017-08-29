@@ -1,4 +1,4 @@
-package com.graphql.objects.service;
+package com.graphql.objects.spring.service;
 
 import org.springframework.stereotype.Component;
 

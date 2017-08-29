@@ -1,9 +1,9 @@
-package com.graphql.objects.graph;
+package com.graphql.objects.spring.graph;
 
 import com.graphql.objects.Graph;
 import com.graphql.objects.GraphData;
-import com.graphql.objects.domain.Customer;
-import com.graphql.objects.service.InfoService;
+import com.graphql.objects.spring.domain.Customer;
+import com.graphql.objects.spring.service.InfoService;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.graphql.objects.domain;
+package com.graphql.objects.spring.domain;
 
 /**
  * Created by tsilva on 8/18/17.

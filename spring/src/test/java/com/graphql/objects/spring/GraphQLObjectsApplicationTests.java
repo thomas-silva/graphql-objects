@@ -1,5 +1,6 @@
-package com.graphql.objects;
+package com.graphql.objects.spring;
 
+import com.graphql.objects.GraphExecutor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.graphql.objects;
+package com.graphql.objects.spring;
 
-import com.graphql.objects.graph.Query;
+import com.graphql.objects.spring.graph.Query;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
