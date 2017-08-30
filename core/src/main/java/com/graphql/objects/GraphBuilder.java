@@ -1,11 +1,14 @@
 package com.graphql.objects;
 
+import com.sun.istack.internal.Nullable;
 import graphql.Scalars;
 import graphql.schema.GraphQLFieldDefinition;
 import graphql.schema.GraphQLObjectType;
+import graphql.schema.GraphQLScalarType;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
@@ -42,9 +45,13 @@ public class GraphBuilder {
                                 return invoke(method, provider, injector);
                             });
         } else {
+
+            GraphQLScalarType scalarType = Optional.ofNullable(scalarType(returnType))
+                                            .orElseThrow(() -> new RuntimeException("unsupported return type"));
+
             return newFieldDefinition()
                             .name(method.getName())
-                            .type(Scalars.GraphQLString)
+                            .type(scalarType)
                             .dataFetcher(environment -> invoke(method, environment.getContext()));
         }
     }
@@ -54,6 +61,27 @@ public class GraphBuilder {
         return possibleGraph.isAnnotationPresent(Graph.class) ||
                Stream.of(possibleGraph.getAnnotations())
                      .anyMatch(annotation -> annotation.annotationType().isAnnotationPresent(Graph.class));
+    }
+
+    @Nullable private static GraphQLScalarType scalarType(Class scalarClass) {
+
+        if (scalarClass == String.class) {
+            return Scalars.GraphQLString;
+        }
+        else if (scalarClass == Integer.class) {
+            return Scalars.GraphQLInt;
+        }
+        else if (scalarClass == Long.class) {
+            return Scalars.GraphQLLong;
+        }
+        else if (scalarClass == Boolean.class) {
+            return Scalars.GraphQLBoolean;
+        }
+        else if (scalarClass == Float.class || scalarClass == Double.class) {
+            return Scalars.GraphQLFloat;
+        }
+
+        return null;
     }
 
     private static Object invoke(Method method, GraphProvider graphProvider, Object ... args) {
