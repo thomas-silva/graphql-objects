@@ -1,2 +1,4 @@
 include 'core'
 include 'spring'
+
+include 'sample-spring-app'

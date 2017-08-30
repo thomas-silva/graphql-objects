@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -13,12 +12,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class GraphQLObjectsApplicationTests {
 
 	@Autowired
-	private ApplicationContext context;
+	private GraphExecutor executor;
 
 	@Test
 	public void contextLoads() {
-
-		GraphExecutor executor = context.getBean(GraphExecutor.class);
 
 		String query = "query { customer { firstName lastName } }";
 

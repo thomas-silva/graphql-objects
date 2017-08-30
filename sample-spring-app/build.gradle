@@ -16,18 +16,15 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 
+sourceCompatibility = 1.8
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
     compile(
-            project(':core'),
-            'org.springframework.boot:spring-boot-autoconfigure',
-            'org.springframework.boot:spring-boot-configuration-processor',
-            'org.springframework.boot:spring-boot-starter-jersey'
+            project(':spring')
     )
-    testCompile(
-            'org.springframework.boot:spring-boot-starter-test'
-    )
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }

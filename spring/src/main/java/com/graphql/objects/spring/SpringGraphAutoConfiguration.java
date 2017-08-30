@@ -1,11 +1,13 @@
 package com.graphql.objects.spring;
 
 import com.graphql.objects.GraphBuilder;
+import com.graphql.objects.GraphExecutor;
 import graphql.GraphQL;
 import graphql.execution.ExecutorServiceExecutionStrategy;
 import graphql.execution.SimpleExecutionStrategy;
 import graphql.schema.GraphQLSchema;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * Created by tsilva on 8/19/17.
  */
 @Configuration
-public class SpringGraphConfig {
+public class SpringGraphAutoConfiguration {
 
     @Bean public ThreadPoolExecutor executor() {
 
@@ -37,5 +39,10 @@ public class SpringGraphConfig {
                       .queryExecutionStrategy(new ExecutorServiceExecutionStrategy(executor))
                       .mutationExecutionStrategy(new SimpleExecutionStrategy())
                       .build();
+    }
+
+    @Bean public GraphExecutor graphExecutor(GraphQL graphQL, ApplicationContext context) {
+
+        return new SpringGraphExecutor(graphQL, new GraphProviderFactory(context));
     }
 }

@@ -5,8 +5,6 @@ import com.graphql.objects.GraphDataInjector;
 import com.graphql.objects.GraphProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,8 +13,6 @@ import java.util.stream.Stream;
 /**
  * Created by tsilva on 8/18/17.
  */
-@Component
-@Scope("prototype")
 @AllArgsConstructor
 public class SpringGraphProvider implements GraphProvider {
 
