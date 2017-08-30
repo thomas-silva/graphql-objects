@@ -1,15 +1,11 @@
 package sample.spring.app.graph;
 
-import com.graphql.objects.Graph;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import com.graphql.objects.spring.Graph;
 
 /**
  * Created by tsilva on 8/29/17.
  */
 @Graph
-@Component
-@Scope("prototype")
 public class Query {
 
     public String helloWorld() {

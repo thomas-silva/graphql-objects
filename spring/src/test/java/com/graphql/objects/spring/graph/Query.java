@@ -1,17 +1,13 @@
 package com.graphql.objects.spring.graph;
 
-import com.graphql.objects.Graph;
 import com.graphql.objects.GraphDataInjector;
+import com.graphql.objects.spring.Graph;
 import com.graphql.objects.spring.domain.Customer;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by tsilva on 8/17/17.
  */
 @Graph
-@Component
-@Scope("prototype")
 public class Query {
 
     public String info() {

@@ -1,18 +1,14 @@
 package com.graphql.objects.spring.graph;
 
-import com.graphql.objects.Graph;
 import com.graphql.objects.GraphData;
+import com.graphql.objects.spring.Graph;
 import com.graphql.objects.spring.domain.Customer;
 import com.graphql.objects.spring.service.InfoService;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by tsilva on 8/18/17.
  */
 @Graph
-@Component
-@Scope("prototype")
 public class CustomerGraph {
 
     private final InfoService infoService;

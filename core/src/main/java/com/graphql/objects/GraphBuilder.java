@@ -30,13 +30,15 @@ public class GraphBuilder {
 
     private static GraphQLFieldDefinition.Builder toFieldDefinition(Method method) {
 
-        if (method.getReturnType().isAnnotationPresent(Graph.class)) {
+        final Class returnType = method.getReturnType();
+
+        if (isGraph(returnType)) {
             return newFieldDefinition()
                             .name(method.getName())
-                            .type(buildGraphQL(method.getReturnType()))
+                            .type(buildGraphQL(returnType))
                             .dataFetcher(environment -> {
                                 GraphProvider provider = environment.getContext();
-                                GraphDataInjector injector = provider.injector(method.getReturnType());
+                                GraphDataInjector injector = provider.injector(returnType);
                                 return invoke(method, provider, injector);
                             });
         } else {
@@ -45,6 +47,13 @@ public class GraphBuilder {
                             .type(Scalars.GraphQLString)
                             .dataFetcher(environment -> invoke(method, environment.getContext()));
         }
+    }
+
+    private static boolean isGraph(Class possibleGraph) {
+
+        return possibleGraph.isAnnotationPresent(Graph.class) ||
+               Stream.of(possibleGraph.getAnnotations())
+                     .anyMatch(annotation -> annotation.annotationType().isAnnotationPresent(Graph.class));
     }
 
     private static Object invoke(Method method, GraphProvider graphProvider, Object ... args) {
